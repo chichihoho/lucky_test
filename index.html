@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>尾牙抽獎</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"><style>
+:root{--bg:#b0102a;--bg2:#74091b;--card:#fff8ea;--ink:#3a1410;--mut:#85594a;--red:#c8102e;--red-d:#8f0b20;--gold:#f2c14e;--gold-l:#ffe6a6;--line:#efd6a4;--wool:#fffaf0;--title:var(--gold-l);--num:var(--gold-l);--reel:var(--red);--btn:var(--red-d);--c1:#c8102e;--c2:#9a5b00;--c3:#0b7a4b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#6e0a1a;--bg2:#38050e;--card:#3a1a1c;--ink:#fbeedd;--mut:#c9a995;--line:#5a2a2c;--wool:#4a2426;--c1:#ff8a98;--c2:#ffcf6e;--c3:#6fe0a8}}
+:root[data-theme=dark]{--bg:#6e0a1a;--bg2:#38050e;--card:#3a1a1c;--ink:#fbeedd;--mut:#c9a995;--line:#5a2a2c;--wool:#4a2426;--c1:#ff8a98;--c2:#ffcf6e;--c3:#6fe0a8}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;color:var(--gold-l);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;background:radial-gradient(900px 520px at 50% 0,rgba(255,90,100,.45),transparent 70%),linear-gradient(180deg,var(--bg),var(--bg2));background-attachment:fixed}
+body.rn{overflow:hidden;height:100vh}
+button,.bt{font:inherit;cursor:pointer;color:var(--ink);background:var(--wool);border:1.5px solid var(--gold);border-radius:999px;padding:8px 16px;text-decoration:none;display:inline-block}
+button:disabled{opacity:.45;cursor:not-allowed}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--wool);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px}
+textarea{width:100%;max-width:100%;resize:vertical;min-height:3.2em;max-height:60vh;display:block}input[type=checkbox]{width:20px;height:20px;padding:0;accent-color:var(--red)}
+.sh0{text-align:center;padding:30px 20px 6px}.sh0 h1{font:900 44px "Noto Serif TC",serif;margin:0;letter-spacing:.14em;color:var(--title);text-shadow:0 3px 0 var(--red-d)}.sh0 p{margin:6px 0 0;opacity:.9}
+.wrap{max-width:980px;margin:0 auto;padding:10px 18px 60px}
+.card{background:var(--card);color:var(--ink);border:3px solid var(--gold);border-radius:22px;padding:16px 20px;margin:18px 0;box-shadow:0 0 0 5px var(--red-d),0 0 0 7px var(--gold),0 20px 40px -20px #0008}
+.sub{border:1.5px solid var(--line);border-radius:16px;padding:12px 16px 8px;margin:0 0 14px;background:color-mix(in srgb,var(--wool) 60%,transparent)}
+h2{margin:0 0 10px;font:900 20px "Noto Serif TC",serif;color:var(--red)}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:10px}
+label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--mut)}label.ck{flex-direction:row;align-items:center;gap:8px;color:var(--ink);font-size:14px;margin:4px 0}
+.b.p,.big{font:700 20px "Noto Sans TC",sans-serif;background:linear-gradient(180deg,color-mix(in srgb,var(--btn) 78%,#ff6a7a),var(--btn));color:var(--gold-l);border:2px solid var(--gold);border-radius:999px;padding:12px 34px;letter-spacing:.12em;box-shadow:0 5px 0 #5e0615}
+.big:active:not(:disabled){transform:translateY(4px);box-shadow:0 1px 0 #5e0615}
+.sh{display:flex;gap:8px;margin-bottom:10px}.sh input{flex:1;min-width:0;font:900 18px "Noto Serif TC",serif}.sh span{flex:none;white-space:nowrap}
+.pr{display:grid;grid-template-columns:92px minmax(0,1fr) minmax(0,1.6fr) minmax(0,1.2fr) 76px 56px;gap:6px;margin:6px 0;align-items:center}
+.pr input,.pr select{width:100%;min-width:0;padding:8px 8px}
+.pr.ph span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}
+.ops{display:flex;gap:6px;justify-content:flex-end}.mv{display:flex;align-items:center;gap:4px;font-weight:700;color:var(--mut)}.mv b{flex:1;font-weight:700}
+button.mb{padding:2px 0;width:24px;height:26px;line-height:1;font-size:12px;border-radius:8px}
+@media(max-width:760px){.pr{grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding-bottom:8px;border-bottom:1px dashed var(--line)}.pr.ph{display:none}.mv{grid-column:1/-1}.pr .ops{grid-column:1/-1;justify-self:end}.mv b{flex:0 0 auto;margin-right:6px}}
+.note{border:1px dashed var(--gold);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:13px;color:var(--mut)}.ph{font-size:12px;color:var(--mut);margin-bottom:0}
+.wr{background:#fff3cd;color:#6b4e00;border-radius:12px;padding:8px 14px;margin:8px 0;font-size:14px}
+.rw{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:14px}
+.rw .sm{font-size:13px;padding:5px 12px;border-width:1px}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.07)}100%{transform:scale(1)}}
+#run{display:none;position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center;overflow:visible}
+body.rn #run{display:block}body.rn #app{display:none}
+#run main{width:1920px;height:1080px;padding:18px 28px 88px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.hero{display:flex;align-items:center;justify-content:center;width:100%;flex-shrink:0}.hero .ht{display:flex;flex-direction:column;align-items:center;text-align:center;width:100%}
+.eyebrow:empty{display:none}
+.eyebrow{font-weight:700;font-size:17px;letter-spacing:.45em;text-indent:.45em;color:var(--gold)}
+#run h1{font:900 64px/1.2 "Noto Serif TC",serif;text-align:center;margin:0;letter-spacing:.14em;text-indent:.14em;color:var(--title);text-shadow:0 3px 0 var(--red-d),0 0 26px rgba(255,200,90,.5)}
+.tabs{display:flex;gap:8px;background:rgba(0,0,0,.28);border:1.5px solid rgba(242,193,78,.55);padding:4px;border-radius:999px;max-width:100%;overflow-x:auto;align-self:flex-start;flex-shrink:0;margin-bottom:8px}
+.tab{font:700 18px "Noto Sans TC",sans-serif;background:transparent;color:var(--gold-l);border:0;border-radius:999px;padding:8px 22px;white-space:nowrap}
+.tab[aria-selected=true]{background:linear-gradient(180deg,var(--gold-l),var(--gold));color:var(--red-d);opacity:1}.tab:disabled{opacity:.6}.tab[aria-selected=true]:disabled{opacity:1}
+.stage{position:relative;width:100%;flex:1;min-height:0;background:var(--card);color:var(--ink);border:3px solid var(--gold);border-radius:28px;padding:18px 48px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 0 0 6px var(--red-d),0 0 0 8px var(--gold),0 28px 50px -20px rgba(0,0,0,.6)}
+.prize{font:900 38px "Noto Serif TC",serif;color:var(--red-d);border:2px solid var(--red);border-radius:999px;padding:8px 40px;background:linear-gradient(180deg,var(--gold-l),var(--gold));box-shadow:0 4px 0 var(--red-d)}
+.pinfo{font-size:26px;margin:10px 0 12px;color:var(--mut)}
+.hd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 24px;text-align:left}.hd .pinfo{margin:0}
+.pi{font:900 38px "Noto Serif TC",serif;margin:0}.pi.a{color:var(--c1)}.pi.b{color:var(--c2)}.pi.c{color:var(--c3);font-size:46px}
+.brow{display:flex;align-items:center;justify-content:space-between;gap:16px}.arow{display:flex;align-items:center;gap:16px}.zb .status{margin:8px 0 0;text-align:right}
+.reels{display:flex;gap:28px;justify-content:center}
+.reel{width:640px;background:radial-gradient(circle at 50% 0,color-mix(in srgb,var(--reel) 75%,#ff6a7a),var(--reel) 45%,color-mix(in srgb,var(--reel) 65%,#000));border-radius:22px;padding:14px 16px 20px;border:3px solid var(--gold);box-shadow:inset 0 0 30px rgba(0,0,0,.3),0 0 0 3px var(--red-d)}
+.reels.solo .reel{width:820px}
+.lab{color:var(--gold-l);font-size:28px;font-weight:700;letter-spacing:.3em}
+.num{font-family:"Noto Serif TC",serif;font-weight:900;font-size:240px;line-height:1.05;color:var(--num);text-shadow:0 3px 0 rgba(0,0,0,.3),0 0 22px rgba(255,214,120,.55);font-variant-numeric:tabular-nums;min-height:1.1em}
+.spin .num,.mc.spin{filter:blur(1.2px)}.reel.done,.mc.done{animation:pop .5s ease}
+.multi{display:none;grid-template-columns:repeat(5,300px);justify-content:center;gap:10px 14px;width:100%;margin-top:8px}.multi.on{display:grid}
+.bm .reels{display:none}
+.mc{width:300px;height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;background:linear-gradient(160deg,var(--reel),color-mix(in srgb,var(--reel) 65%,#000));border:2px solid var(--gold);border-radius:14px;padding:4px 6px;color:var(--num);font:900 42px/1.15 "Noto Serif TC",serif;font-variant-numeric:tabular-nums}
+.stage:not(.bm) .multi{margin-top:8px;gap:8px 12px}.multi.rv{display:grid}
+.stage:not(.bm) .mc{height:52px;font-size:30px;flex-direction:row;gap:10px;padding:0 6px}
+.mc small{display:block;font:500 16px "Noto Sans TC",sans-serif;opacity:.85}
+.controls{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:16px}
+.field{display:flex;align-items:center;gap:10px;background:var(--wool);border:1.5px solid var(--gold);border-radius:999px;padding:6px 8px 6px 20px}.field label{font-size:20px;font-weight:700;color:var(--ink);flex-direction:row}
+.field input,.field select{font:700 24px "Noto Serif TC",serif;text-align:center;background:var(--card);border-radius:999px}.field input{width:90px}.field select{min-width:240px;height:100%}.field select option{font:500 14px "Noto Sans TC",sans-serif}
+.field input,.field select{height:52px}
+.zb .field{width:340px}.zb .brow>.field{flex:1 1 0;width:auto;min-width:0}.zb .arow{flex:none}.zb .brow>.field select{text-align:left;text-align-last:left}.zb .field select{flex:1;min-width:0}.zb .field input{flex:1;min-width:0;width:auto}
+/* 執行頁三大區塊：①獎項資訊橫條 ②數字跳動區（盡量放大）③操作橫條 */
+.stage.zn{justify-content:flex-start;align-items:stretch;gap:12px;padding:14px 20px;text-align:left}
+.zh,.zb{flex:0 0 auto;background:var(--wool);border:1.5px solid var(--line);border-radius:20px;padding:8px 22px}
+.zh{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:84px}
+.wns{text-align:right}.wns .wnl{font-size:18px}
+.zm{flex:1 1 0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:10px 14px;border:1.5px solid var(--line);border-radius:24px;background:color-mix(in srgb,var(--wool) 45%,transparent)}
+.zm .reels{flex:1 1 0;min-height:0;width:100%}
+.zm .reel,.zm .reels.solo .reel{flex:1 1 0;width:auto;min-width:0;height:100%;container-type:size;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.zm .reels.solo .reel{max-width:1200px}
+.zm .num{font-size:240px;font-size:min(80cqh,34cqw);min-height:0}
+.stage.zn .multi{flex:0 0 auto;margin-top:0}
+/* 得獎彈窗：多位得獎者一併列出（5 欄×2 列），依螢幕比例自適應 */
+.pop.w{max-width:min(96vw,1800px);padding:clamp(18px,2.4vw,36px)}
+.pop.w .gz{font-size:clamp(34px,4.4vw,76px);padding:10px 48px;margin-bottom:14px}
+.pop.w .tag{font-size:clamp(24px,2.7vw,48px);line-height:1.3}
+.pop.w .rows{grid-template-columns:repeat(var(--c,1),minmax(0,1fr));max-height:none;overflow:visible;margin:clamp(14px,2.4vh,28px) 0 clamp(12px,2vh,22px)}
+.pop.w .wrow{flex-direction:column;justify-content:center;gap:clamp(4px,.8vh,10px);padding:clamp(10px,1.6vh,22px) 10px;text-align:center}
+.pop.w .wrow b{font-size:clamp(26px,min(calc(min(96vw,1800px)*.9/var(--c,1)/5.4),9vh),80px);line-height:1.15;white-space:nowrap}
+.pop.w .wrow span{font-size:clamp(14px,1.3vw,20px)}
+.pop.w .big{font-size:20px;padding:10px 42px;box-shadow:0 4px 0 #5e0615;letter-spacing:.1em}
+@media(max-aspect-ratio:1/1){.pop.w .rows{grid-template-columns:repeat(var(--cp,1),minmax(0,1fr))}.pop.w .wrow b{font-size:clamp(26px,min(calc(96vw*.9/var(--cp,1)/5.4),8vh),80px)}}
+.big{font-size:26px;padding:16px 52px;letter-spacing:.1em;box-shadow:0 6px 0 #5e0615}.big:disabled{opacity:.55}
+.ghost{background:transparent;color:var(--mut);border:1.5px solid var(--line);font-size:18px;padding:8px 18px}
+.status{min-height:1.5em;margin:10px 0 0;color:var(--mut);font-size:20px}.status.warn,.wnl{color:var(--red);font-weight:700}.wnl{font-size:18px}
+.tools{position:absolute;left:30px;bottom:10px;display:flex;gap:10px;z-index:30}
+.tools button{font-size:15px;padding:7px 14px;background:rgba(0,0,0,.3);color:var(--gold-l);opacity:.55}.tools button:hover{opacity:1}
+.ls-btn{position:absolute;right:30px;bottom:10px;z-index:30;font-size:18px;padding:9px 22px;background:linear-gradient(180deg,var(--gold-l),var(--gold));color:var(--red-d);border:2px solid var(--red-d);box-shadow:0 3px 0 var(--red-d)}
+.list{display:none;position:absolute;right:44px;top:150px;bottom:64px;width:820px;z-index:20;background:var(--card);color:var(--ink);border:3px solid var(--gold);border-radius:24px;padding:20px 26px;flex-direction:column;overflow:hidden;box-shadow:0 0 0 5px var(--red-d),0 0 0 7px var(--gold),0 0 0 9999px rgba(30,3,8,.55)}.list.open{display:flex}
+.list h2{display:flex;justify-content:space-between;align-items:baseline;font-size:26px}.list h2 small{font:400 16px "Noto Sans TC",sans-serif;color:var(--mut)}
+#wl{overflow-y:auto;flex:1}.pz{display:flex;gap:14px;padding:12px 0;border-bottom:1.5px dashed var(--line)}.pn{flex:0 0 150px;font:900 18px "Noto Serif TC",serif;color:var(--red);padding-top:6px}.pn small{font:400 13px "Noto Sans TC",sans-serif;color:var(--mut)}.chips{display:flex;flex-wrap:wrap;gap:8px}
+.ch{font:700 20px "Noto Serif TC",serif;background:var(--wool);border:1.5px solid var(--gold);border-left:5px solid var(--red);border-radius:10px;padding:6px 12px}.ch.skip{color:var(--mut);text-decoration:line-through;opacity:.65;font-size:16px}
+.empty{color:var(--mut);padding:18px;text-align:center;border:1.5px dashed var(--line);border-radius:14px}.lt{display:flex;gap:8px;margin-top:12px}
+.ov{position:fixed;inset:0;z-index:200;background:rgba(40,4,10,.78);display:flex;align-items:center;justify-content:center;padding:16px}
+.pop{width:100%;max-width:min(92vw,1100px);max-height:92vh;overflow:auto;background:var(--card);color:var(--ink);border:3px solid var(--gold);border-radius:28px;padding:clamp(22px,4vw,48px);text-align:center;box-shadow:0 0 0 6px var(--red-d),0 0 0 8px var(--gold),0 30px 70px -20px rgba(0,0,0,.7);animation:pop .45s ease}
+.pop.s{max-width:620px}.pop table{border-collapse:collapse;width:100%}.pop td,.pop th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}.sc{max-height:50vh;overflow:auto}
+.gz{display:inline-block;background:var(--red);color:var(--gold-l);padding:8px 34px;border-radius:999px;font-weight:700;font-size:clamp(22px,2.6vw,36px);letter-spacing:.3em;margin-bottom:12px}
+.tag{font:700 clamp(17px,1.7vw,24px) "Noto Serif TC",serif;color:var(--mut)}.tag b{color:var(--red)}
+.rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));max-height:56vh;overflow:auto;gap:14px;margin:18px 0 12px}
+.wrow{flex-direction:row;display:flex;justify-content:space-between;align-items:center;gap:12px;border:1.5px solid var(--gold);border-radius:16px;padding:clamp(14px,1.8vw,24px) clamp(18px,2.2vw,32px);background:var(--wool);cursor:pointer;color:var(--ink)}
+.wrow b{font:900 clamp(32px,3.6vw,60px) "Noto Serif TC",serif}.wrow span{display:flex;align-items:center;gap:6px;font-size:clamp(15px,1.5vw,22px);color:var(--mut)}.wrow.no{opacity:.6}.wrow.no b{text-decoration:line-through}
+.hn{margin:0 0 18px;color:var(--mut);font-size:clamp(15px,1.4vw,20px)}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#000c;color:#fff;padding:10px 18px;border-radius:99px;z-index:400;display:none}
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:300}
+#ds{position:fixed;top:0;right:0;bottom:0;width:320px;max-width:100%;z-index:250;background:#fffdf8;color:#3a1410;padding:16px;overflow:auto;box-shadow:-10px 0 40px rgba(0,0,0,.45);transform:translateX(105%);transition:transform .25s}#ds.open{transform:none}
+#ds h3{margin:0 0 6px;color:#c8102e;display:flex;justify-content:space-between;align-items:center}#ds h4{margin:14px 0 6px;font-size:14px;color:#85594a;border-bottom:1px solid #efd6a4}
+#ds label{flex-direction:row;justify-content:space-between;align-items:center;gap:10px;font-size:14px;margin:7px 0;color:#3a1410}#ds input[type=text]{flex:1;min-width:0;background:#fff;color:#3a1410}#ds input[type=color]{width:46px;height:28px;border:0;padding:0;background:none}
+.hh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}.hh h2{margin:0}
+.hh .sm,.vb .sm,.fl .sm{font-size:13px;padding:5px 12px;border-width:1px}.hn2{margin:0 0 8px;font-size:12px;color:var(--mut)}
+.fl{display:flex;align-items:center;gap:10px;min-height:38px}.fl em{font-style:normal;color:var(--ink);font-size:14px}
+.vb{display:flex;justify-content:flex-end;margin-top:8px}.vp{max-height:300px;overflow:auto;border:1px dashed var(--gold);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:13px;color:var(--ink)}.vp[hidden]{display:none}
+.vs{margin:0 0 6px;color:var(--mut)}.vt{display:flex;flex-wrap:wrap;align-items:center;gap:2px;margin:3px 0}.vt b{flex:0 0 64px;font-size:12px;color:var(--mut)}
+.vc{display:inline-block;min-width:26px;text-align:center;padding:1px 5px;margin:2px;border:1px solid var(--line);border-radius:6px;font-variant-numeric:tabular-nums}.vc.x{text-decoration:line-through;opacity:.35}
+.vtb{border-collapse:collapse;width:100%}.vtb th,.vtb td{border-bottom:1px solid var(--line);padding:3px 8px;text-align:left}.vtb th{position:sticky;top:-8px;background:var(--card);color:var(--mut);font-weight:500}
+.reels.cv .num{white-space:nowrap;overflow:hidden;max-width:100%;line-height:1.2}
+.mc .u{font-size:.66em;opacity:.9;max-width:130px;overflow:hidden;text-overflow:ellipsis}
+.pop.w .wrow .un{font-size:clamp(13px,1.5vw,24px);color:var(--mut);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pop.w .wrow.cv b{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.b.p.alt{background:var(--card);color:var(--btn);box-shadow:0 5px 0 var(--line)}
+.vb .sm{background:var(--red);color:#fff;border-color:var(--red-d)}
+.sg{border-bottom:2.5px solid var(--gold);padding:6px 0 4px}.sg:last-child{border-bottom:0}.sn{font:900 24px "Noto Serif TC",serif;color:var(--ink);background:var(--wool);border-radius:8px;padding:4px 12px;margin:6px 0 0}
+.pz.sp{padding:8px 0}.sp .pn{flex:0 0 170px;font-size:28px;padding-top:4px}
+#wl .sp .ch{font-size:26px}#wl .pn{font-size:24px}.fr{display:grid;grid-template-columns:44px 84px minmax(0,1fr) minmax(0,1fr) minmax(0,1.5fr);gap:8px;align-items:center;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:16px}.fr.fh{font-size:12px;color:var(--mut);border-bottom:1px solid var(--line)}.fr .fn{font:900 17px "Noto Serif TC",serif;color:var(--red)}.fr .chips{gap:5px}#wl .fr .ch{font-size:16px;padding:3px 8px}#wl .fr .ch.skip{font-size:14px}
+.lt .tg.on{background:var(--red);color:#fff;border-color:var(--red-d)}
+.dnb{display:flex;gap:22px;justify-content:center;margin-top:26px;flex-wrap:wrap}.sm2{font:700 18px "Noto Sans TC",sans-serif;padding:9px 26px;border-radius:999px;background:var(--wool);color:var(--red-d);border:1.5px solid var(--gold);cursor:pointer}
+.prize.dp{font-size:84px;padding:0;letter-spacing:.14em;background:none;border:0;box-shadow:none;color:var(--red)}
+.pop .rw .b.p{min-width:150px;padding-left:26px;padding-right:26px;text-align:center}
+.eqb{font:700 18px "Noto Sans TC",sans-serif;min-width:200px;padding:12px 26px;border-radius:999px;border:1.5px solid var(--gold);background:var(--wool);color:var(--ink);cursor:pointer}.eqb:hover{background:var(--gold-l)}
+.ar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:6px 0}.ar label.ck{margin:0;min-width:130px}.ar label.sl{flex-direction:row;align-items:center;gap:8px;font-size:14px;color:var(--ink)}.ar label.sl select{min-width:150px;max-width:100%}
+.gs .ck{margin:0;min-height:34px;box-sizing:border-box}.gs .ar{margin:0;min-height:34px}.gs .ar label.sl select,.ar.gs>select{padding-top:4px;padding-bottom:4px}
+.sm.lg{font-size:15px;padding:9px 20px}.pvb{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:#fff3cd;color:#6b4e00;border:2px solid #e0b43c;border-radius:999px;padding:8px 24px;font-size:20px;font-weight:700;z-index:40}
+.lts{text-align:right;font-size:12px;color:#d6d6d6;margin-top:10px}
+</style></head><body><div id="app"></div><div id="run"></div><div id="modal"></div><div id="toast"></div><canvas id="fx"></canvas><script>
+const $=s=>document.querySelector(s),sl=ms=>new Promise(r=>setTimeout(r,ms)),CN='一二三四五六七八九十',LS='wy-lot1',DK='wy-lot-design';
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CATS=['禮品獎','現金獎','驚喜獎'],mk=()=>({name:'抽獎',cat:'禮品獎',count:3,mode:'gen',pm:'once',prizes:[]});
+const DC={an:true,ab:true,vd:false,inv:'skip',rep:false,mode:'table',roster:[],tables:100,seats:10,total:1000,excl:'',abs:'skip',ord:'asc',bonus:true,free:true,auto:true,snd:true,prov:true};
+let C={...DC},ST=[mk()],VO={R:0,P:0},S=null,PV=null,V='set',busy=0,LO=false,MSG=null,UL=false,SNAP='';
+const cl=(v,a,b)=>Math.max(a,Math.min(b,Math.round(+v)||a));
+const op=(a,v)=>a.map(x=>`<option value="${x[0]}"${x[0]==v?' selected':''}>${x[1]}</option>`).join('');
+const I=(k,v,t='text',x='')=>`<input data-k="${k}" type="${t}" value="${esc(v)}" ${x}>`;
+const SE=(k,a,v,x='')=>`<select data-k="${k}" ${x}>${op(a,v)}</select>`;
+const CK=(k,v,x='')=>`<input type="checkbox" data-k="${k}" ${v?'checked':''} ${x}>`;
+let TS=0;const fts=t=>{if(!t)return'尚無紀錄';const d=new Date(t),z=n=>String(n).padStart(2,'0');return `${d.getFullYear()}/${z(d.getMonth()+1)}/${z(d.getDate())} ${z(d.getHours())}:${z(d.getMinutes())}:${z(d.getSeconds())}`};
+function save(){if(PV)return;try{TS=Date.now();localStorage.setItem(LS,JSON.stringify({C,ST,S,ts:TS}))}catch(e){}}
+const mig=()=>ST.forEach(s=>(s&&s.prizes||[]).forEach(p=>{if(p&&p.name==='幸運獎')p.name='';if(p&&p.gift==='神秘好禮')p.gift=''}));
+function load(){try{const d=JSON.parse(localStorage.getItem(LS));if(d){TS=d.ts||0;C={...DC,...d.C};ST=d.ST||ST;mig();return d.S}}catch(e){}return null}
+/* 個別設計 */
+const DT={eye:'年終尾牙',title:'幸運抽獎',sub:'吉祥如意',foot:'恭賀新禧　萬事如意',l1:'福',l2:'旺'};
+const DF={'--bg':'#b0102a','--bg2':'#74091b','--card':'#fff8ea','--ink':'#3a1410','--title':'#ffe6a6','--gold':'#f2c14e','--reel':'#c8102e','--num':'#ffe6a6','--btn':'#8f0b20'};
+const CV=[['--bg','背景主色'],['--bg2','背景暗部'],['--card','卡片底色'],['--ink','卡片文字'],['--title','標題色'],['--gold','金色邊框'],['--reel','抽獎框'],['--num','號碼色'],['--btn','按鈕色']];
+let D={t:{},c:{},g:{lan:1,sheep:1}};try{const s=JSON.parse(localStorage.getItem(DK));if(s)D={t:s.t||{},c:s.c||{},g:{...D.g,...s.g}}}catch(e){}
+const TL={eye:20,title:10},tx=k=>esc([...String(D.t[k]!=null?D.t[k]:DT[k])].slice(0,TL[k]||99).join(''));
+function dApply(){CV.forEach(x=>D.c[x[0]]?document.documentElement.style.setProperty(x[0],D.c[x[0]]):document.documentElement.style.removeProperty(x[0]));try{localStorage.setItem(DK,JSON.stringify(D))}catch(e){}}
+function dBuild(){const p=document.createElement('aside');p.id='ds';const T=[['eye','眉標（最多20字）'],['title','標題（最多10字）']];
+p.innerHTML=`<h3>個別設計<button id="dx">✕</button></h3><h4>文字</h4>${T.map(x=>`<label>${x[1]}<input type="text" data-t="${x[0]}" maxlength="${TL[x[0]]}" value="${esc(D.t[x[0]]!=null?D.t[x[0]]:DT[x[0]])}"></label>`).join('')}<h4>顏色</h4>${CV.map(x=>`<label>${x[1]}<input type="color" data-c="${x[0]}" value="${D.c[x[0]]||DF[x[0]]}"></label>`).join('')}<p><button id="drs">還原預設</button></p>`;
+document.body.appendChild(p);
+p.oninput=e=>{const i=e.target,d=i.dataset;if(d.t)D.t[d.t]=i.value;else if(d.c)D.c[d.c]=i.value;else if(d.g)D.g[d.g]=i.checked?1:0;dApply();if(V==='run'&&S)runView()};
+$('#dx').onclick=()=>p.classList.remove('open');
+$('#drs').onclick=()=>{D={t:{},c:{},g:{lan:1,sheep:1}};dApply();p.remove();dBuild();$('#ds').classList.add('open');if(V==='run'&&S)runView()}}
+const dsT=()=>$('#ds').classList.toggle('open');
+/* 音效與彩帶 */
+const SF=(()=>{let c=null,lt=0;const ac=()=>{if(!C.snd)return null;if(!c){try{c=new(window.AudioContext||window.webkitAudioContext)()}catch(e){return null}}if(c.state==='suspended')c.resume();return c};
+const tn=(f,t,d,ty,v,f2)=>{const x=ac();if(!x)return;const o=x.createOscillator(),g=x.createGain();o.type=ty;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(x.destination);o.start(t);o.stop(t+d+.05)};
+return{tick(){const x=ac();if(!x)return;const n=x.currentTime;if(n-lt<.03)return;lt=n;tn(1000+Math.random()*500,n,.05,'square',.04)},
+land(){const x=ac();if(!x)return;const n=x.currentTime;tn(220,n,.2,'sine',.28,80);tn(1320,n+.02,.3,'triangle',.1)},
+win(){const x=ac();if(!x)return;const n=x.currentTime;tn(130,n,.25,'sine',.35,50);[523,659,784,1047].forEach((f,k)=>tn(f,n+k*.11,.28,'triangle',.16));[523,659,784,1047].forEach(f=>tn(f,n+.5,1.3,'triangle',.1))}}})();
+const cv=$('#fx'),cx=cv.getContext('2d');let pts=[],raf=0;
+function burst(){const cs=['#c8102e','#e8b23a','#f8dc8e','#ff5a6e','#fff3d6'];for(let i=0;i<140;i++){const s=i%2;pts.push({x:s?cv.width*.08:cv.width*.92,y:cv.height*.9,vx:(s?1:-1)*(3+Math.random()*9),vy:-(12+Math.random()*13),w:6+Math.random()*7,h:10+Math.random()*8,c:cs[i%5],r:0,vr:(Math.random()-.5)*.4,l:0})}if(!raf)raf=requestAnimationFrame(fr)}
+function fr(){cx.clearRect(0,0,cv.width,cv.height);pts=pts.filter(p=>p.y<cv.height+40&&p.l<260);pts.forEach(p=>{p.l++;p.vy+=.35;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore()});raf=pts.length?requestAnimationFrame(fr):0}
+const rsz=()=>{$('#run').style.transform=`translate(-50%,-50%) scale(${Math.min(innerWidth/1920,innerHeight/1080)})`};
+const sz=()=>{cv.width=innerWidth;cv.height=innerHeight};sz();addEventListener('resize',()=>{sz();rsz()});
+/* 名單與規則 */
+function fix(){C.rep=!!C.rep;C.an=C.an!==false;C.ab=C.ab!==false;C.vd=false;if(!['skip','back','void'].includes(C.abs))C.abs='skip';if(!['skip','back','void'].includes(C.inv))C.inv='skip';if(!['table','num','csv'].includes(C.mode))C.mode=DC.mode;C.excl=typeof C.excl==='string'?C.excl:'';C.roster=(Array.isArray(C.roster)?C.roster:[]).filter(r=>r&&typeof r==='object').slice(0,1500).map(r=>({u:r.u==null?'':''+r.u,n:r.n==null?'':''+r.n})).filter(r=>r.n.trim());ST.length=Math.min(ST.length,10);C.tables=cl(C.tables,1,150);C.seats=cl(C.seats,1,12);C.total=cl(C.total,1,1500);
+ST.forEach((s,i)=>{s.name=s.name==null?'抽獎':[...(''+s.name)].slice(0,4).join('');s.cat=({'禮品':'禮品獎','現金':'現金獎','驚喜':'驚喜獎'})[s.cat]||(CATS.includes(s.cat)?s.cat:'禮品獎');delete s.indep;if(!['seq','once'].includes(s.pm))s.pm=(s.prizes||[]).some(q=>q&&q.pm==='seq')?'seq':'once';if(!['gen','table'].includes(s.mode))s.mode='gen';s.count=cl(s.count,1,50);while(s.prizes.length<s.count)s.prizes.push({no:'',name:'',gift:'',per:1});s.prizes.length=s.count;s.prizes.forEach(p=>{p.per=cl(p.per,1,10);p.no=p.no==null?'':[...(''+p.no)].slice(0,4).join('');p.name=p.name==null?'':[...(''+p.name)].slice(0,20).join('');p.gift=p.gift==null?'':[...(''+p.gift)].slice(0,10).join('');delete p.pm});if(C.mode!=='table')s.mode='gen';if(/^(抽獎|第.階段)$/.test(s.name))s.name=ST.length>1?'第'+CN[i]+'階段':'抽獎'})}
+function ex(){return C.excl.replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-65248)).replace(/[～〜∼]/g,'~').replace(/[－–—‐‑−]/g,'-').split(/[,，、;；\s]+/).filter(Boolean)}
+const exOK=(e,T)=>T?/^\d+(-\d+|~\d+)?$/.test(e):/^\d+([~-]\d+)?$/.test(e);
+const exBad=()=>{if(C.mode==='csv')return[];const T=C.mode==='table';return ex().filter(e=>!exOK(e,T))};
+function full(){const E=ex(),a=[];
+if(C.mode==='csv')return C.roster.map((_,i)=>''+i);
+if(C.mode==='table'){for(let t=1;t<=C.tables;t++)for(let s=1;s<=C.seats;s++)if(!E.some(e=>{const m=e.match(/^(\d+)(?:-(\d+))?$/),r=e.match(/^(\d+)~(\d+)$/);return r?t>=Math.min(+r[1],+r[2])&&t<=Math.max(+r[1],+r[2]):m&&+m[1]===t&&(m[2]==null||+m[2]===s)}))a.push(t+'-'+s)}
+else for(let n=1;n<=C.total;n++)if(!E.some(e=>{const m=e.match(/^(\d+)(?:[~-](\d+))?$/);return m&&(m[2]==null?+m[1]===n:n>=Math.min(+m[1],+m[2])&&n<=Math.max(+m[1],+m[2]))}))a.push(''+n);return a}
+const seats=()=>Array.from({length:C.seats},(_,i)=>i+1);
+function build(){fix();let tot=0,k=0;const man=ST.some(s=>s.prizes.some(p=>p.no.trim()));ST.forEach(s=>s.prizes.forEach(p=>{if(!p.no.trim())tot++}));const plan=[];
+ST.forEach((s,si)=>s.prizes.forEach((p,j)=>{let no=p.no.trim();if(!no&&(man||!C.an))no='';else if(!no){k++;no='第'+(man||C.ord==='asc'?k:tot-k+1)+'獎'}
+plan.push({si,od:j+1,sn:s.name,cat:s.cat,gm:s.mode,no,pn:p.name.trim()||s.cat,gift:p.gift.trim(),per:p.per,pm:s.pm,got:[],void:0,abs:[],N:0,ok:false,done:false})}));
+S={plan,cur:0,pool:full(),seat:seats(),res:[],bn:0,segG:false,segT:false,st:{}};MSG=null;save()}
+function wr(){const a=[];let g=0,t=0;ST.forEach(s=>{if(s.mode==='table'){if(g)a.push('注意：先「一般抽法」再「桌獎抽法」，可能導致部分桌獎得獎者重複得獎！');t=1}else{if(t&&C.auto&&!C.rep&&C.mode==='table')a.push('注意：先「桌獎抽法」再「一般抽法」，部分桌獎得獎座位號後續不再得獎！');g=1}});return[...new Set(a)]}
+function chk(){const a=[];if(C.mode==='csv'&&!C.roster.length)a.push('尚未匯入名單 CSV（欄位：單位、大名）');let g=0,t=0;ST.forEach(s=>s.prizes.forEach(p=>{if(s.mode==='table')t+=p.per;else g+=p.per}));const z=full().length;
+if(!C.rep&&g>z)a.push(`一般抽法共需抽出 ${g} 位，但有效名單只有 ${z} 位`);if(t>C.seats)a.push(`桌獎抽法共需抽出 ${t} 個座位號，但每桌只有 ${C.seats} 個`);return a}
+/* CSV 匯入與檢視 */
+function pcsv(t){t=t.replace(/^\ufeff/,'');const R=[];let r=[],f='',q=0;
+for(let i=0;i<t.length;i++){const c=t[i];
+if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=0}else f+=c}
+else if(c==='"'&&f==='')q=1;
+else if(c===','||c==='\t'){r.push(f);f=''}
+else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;r.push(f);R.push(r);r=[];f=''}
+else f+=c}
+if(f!==''||r.length){r.push(f);R.push(r)}
+return R.filter(r=>r.some(x=>x.trim()!==''))}
+async function rdf(file){const b=await file.arrayBuffer(),u=new Uint8Array(b);
+if(u[0]===0xFF&&u[1]===0xFE)return new TextDecoder('utf-16le').decode(b);
+try{return new TextDecoder('utf-8',{fatal:true}).decode(b)}catch(e){try{return new TextDecoder('big5').decode(b)}catch(e2){return new TextDecoder().decode(b)}}}
+function pick1(cb,acc){const i=document.createElement('input');i.type='file';i.accept=acc||'.csv,.txt,text/csv';i.onchange=async()=>{const f=i.files[0];if(!f)return;let t;try{t=await rdf(f)}catch(e){return toast('讀取檔案失敗')}cb(t)};i.click()}
+function impR(){if(S&&S.res.length&&!UL)return;pick1(t=>{const R=pcsv(t),hi=R.findIndex(r=>r.some(x=>x.trim()==='單位')&&r.some(x=>x.trim()==='大名'));
+if(hi<0)return toast('匯入失敗：第一列標題必須包含「單位」與「大名」');
+const ui=R[hi].findIndex(x=>x.trim()==='單位'),ni=R[hi].findIndex(x=>x.trim()==='大名'),a=[];let sk=0,tr=0;
+R.slice(hi+1).forEach(r=>{const u=(r[ui]||'').trim(),n=(r[ni]||'').trim();if(!n){sk++;return}{const u2=[...u].slice(0,6).join(''),n2=[...n].slice(0,4).join('');if(u2!==u||n2!==n)tr++;a.push({u:u2,n:n2})}});
+if(!a.length)return toast('匯入失敗：沒有可用的資料（大名不可空白）');
+let cut=0;if(a.length>1500){cut=a.length-1500;a.length=1500}
+C.roster=a;save();setView();toast(`已匯入 ${a.length} 位`+(sk?`，略過 ${sk} 列（大名空白）`:'')+(tr?`，${tr} 列超過字數上限（單位6字、大名4字）已截斷`:'')+(cut?`，超過 1500 位，已捨棄 ${cut} 位`:''))})}
+async function impP(){if(S&&S.res.length&&!UL)return;if(!await RM('選擇「匯入csv檔」名單：<br>① CSV 第一列標題須包含「階段」「順序」「獎項編號」「獎項名稱/提供者」「獎品名稱」。<br>② 階段與獎項編號至多4個中文字、順序必須為數字、獎項名稱/提供者至多20個中文字、獎品名稱至多10個字。<br>③ 匯入後會取代目前獎項，仍可再自行調整與增刪。',1))return;pick1(async t=>{const R=pcsv(t),K={'階段':'s','順序':'o','獎項編號':'no','獎項名稱/提供者':'n','獎項名稱':'n','提供者':'n','獎品名稱':'g','每次抽出':'p'};
+let hi=-1,col={};R.some((r,i)=>{const m={};r.forEach((x,j)=>{const k=K[x.trim().replace(/\s/g,'').replace('／','/')];if(k&&!(k in m))m[k]=j});if(Object.keys(m).length){hi=i;col=m;return true}});
+if(hi<0)return toast('匯入失敗：找不到標題列（階段、順序、獎項編號、獎項名稱/提供者、獎品名稱、每次抽出）');
+const g=(r,k)=>col[k]==null?'':(r[col[k]]||'').trim(),G=[];let last='抽獎',cut=0;
+R.slice(hi+1).forEach((r,idx)=>{const v={no:g(r,'no'),name:g(r,'n'),gift:g(r,'g'),p:g(r,'p'),o:g(r,'o'),s:g(r,'s')};if(!v.no&&!v.name&&!v.gift&&!v.p)return;if(v.s)last=v.s;
+let x=G.find(y=>y.name===last);if(!x){if(G.length>=10){cut++;return}G.push(x={name:last,l:[]})}
+x.l.push({idx,o:v.o!==''&&isFinite(+v.o)?+v.o:Infinity,no:[...v.no].slice(0,4).join(''),name:[...v.name].slice(0,20).join(''),gift:[...v.gift].slice(0,10).join(''),per:cl(parseInt(v.p),1,10)})});
+if(!G.length)return toast('匯入失敗：沒有可用的獎項資料');
+const ns=G.map(x=>{x.l.sort((a,b)=>a.o-b.o||a.idx-b.idx);if(x.l.length>50){cut+=x.l.length-50;x.l.length=50}const l=x.l.map(q=>({no:q.no,name:q.name,gift:q.gift,per:q.per}));return{...mk(),name:[...x.name].slice(0,4).join(''),count:l.length,prizes:l}});
+if(!await ask('匯入將取代目前所有獎項設定，是否繼續？'))return;
+ST=ns;fix();save();setView();toast(`已匯入 ${ns.length} 個階段、${ns.reduce((a,s)=>a+s.prizes.length,0)} 個獎項`+(cut?`，超出上限者已略過 ${cut} 筆`:''))})}
+function vR(){if(C.mode==='csv'){const R=C.roster;return R.length?`<div class="vs">共 ${R.length} 位</div><table class="vtb"><tr><th>#</th><th>單位</th><th>大名</th></tr>${R.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.u)}</td><td>${esc(r.n)}</td></tr>`).join('')}</table>`:'<div class="vs">尚未匯入名單</div>'}
+const E=new Set(full());
+if(C.mode==='table'){const tb=cl(C.tables,1,150),sc=cl(C.seats,1,12);let h=`<div class="vs">共 ${tb} 桌、每桌 ${sc} 人，有效名單 ${E.size} 位${E.size<tb*sc?`（排除 ${tb*sc-E.size} 位，以刪除線標示）`:''}</div>`;
+for(let t=1;t<=tb;t++){h+=`<div class="vt"><b>第 ${t} 桌</b>`;for(let s=1;s<=sc;s++)h+=`<span class="vc${E.has(t+'-'+s)?'':' x'}">${s}</span>`;h+='</div>'}return h}
+const n=cl(C.total,1,1500);let h=`<div class="vs">共 ${n} 人，有效名單 ${E.size} 位${E.size<n?`（排除 ${n-E.size} 位，以刪除線標示）`:''}</div>`;for(let i=1;i<=n;i++)h+=`<span class="vc${E.has(''+i)?'':' x'}">${i}</span>`;return h}
+function vP(){let tot=0,k=0,rows='',np=0,nw=0;ST.forEach(s=>(s.prizes||[]).forEach(p=>{if(!(p.no||'').trim())tot++}));
+ST.forEach(s=>(s.prizes||[]).forEach((p,j)=>{let no=(p.no||'').trim();if(!no&&(!C.an||ST.some(s=>s.prizes.some(q=>(q.no||'').trim()))))no='';else if(!no){k++;no='第'+(C.ord==='asc'||ST.some(s=>s.prizes.some(q=>(q.no||'').trim()))?k:tot-k+1)+'獎'}const per=cl(p.per,1,10);np++;nw+=per;rows+=`<tr><td>${esc(s.name)}</td><td>${j+1}</td><td>${esc(no)}</td><td>${esc((p.name||'').trim()||s.cat)}</td><td>${esc(p.gift||'')}</td><td>${per}</td></tr>`}));
+return `<div class="vs">共 ${ST.length} 個階段、${np} 個獎項，合計抽出 ${nw} 位</div><table class="vtb"><tr><th>階段</th><th>順序</th><th>獎項編號</th><th>獎項名稱/提供者</th><th>獎品名稱</th><th>每次抽出</th></tr>${rows}</table>`}
+function tv(k,b){VO[k]=!VO[k];const e=$('#p'+k);e.hidden=!VO[k];if(VO[k])e.innerHTML=k==='R'?vR():vP();b.textContent=VO[k]?'關閉檢視':(k==='R'?'檢視名單':'檢視獎項')}
+const rv=()=>['R','P'].forEach(k=>{const e=$('#p'+k);if(e&&VO[k]&&!e.hidden)e.innerHTML=k==='R'?vR():vP()});
+/* 設定頁 */
+function setView(){fix();const MAN=ST.some(s=>s.prizes.some(p=>p.no.trim()));const T=C.mode==='table',bd=exBad(),LK=!!S&&S.res.length>0&&!UL;const nm={};ST.forEach(s=>s.prizes.forEach(p=>{const k=p.no.trim();if(k)nm[k]=(nm[k]||0)+1}));const dn=Object.values(nm).filter(v=>v>1).reduce((a,b)=>a+b,0),w=[...(dn?[`注意：有${dn}個獎項編號重複登錄，請再次確認獎項填入是否無誤！`]:[]),...(C.rep?['注意：「允許重複得獎」功能已開啟！已得獎者後續獎項有可能會重複抽出！']:[]),...(bd.length?['排除選項無法辨識，已被忽略：'+esc(bd.join('、'))]:[]),...chk(),...wr()];
+$('#app').innerHTML=`<div class="sh0"><h1>尾牙抽獎設定</h1><p>設定會自動記憶在此瀏覽器，建議設定完成後匯出設定，以避免不同瀏覽器切換遺失資料</p></div><div class="wrap">${S&&S.res.length?(UL?'<div class="wr">⚠ 已解鎖修改：變更不會影響目前進度，需按「套用設定並重新開始」才會生效（會清空抽獎結果）；若按「繼續抽獎」則放棄這些修改。</div>':'<div class="wr">目前已有抽獎進度，名單與獎項設定已鎖定，避免與進度不一致。 <button onclick="UL=true;SNAP=JSON.stringify({C,ST});setView()">解鎖修改</button></div>'):''}
+<div class="card lk"><h2>抽獎名單</h2><div class="g"><label>名單模式${SE('C.mode',[['table','抽多少桌'],['num','抽多少人'],['csv','匯入csv檔']],C.mode,'data-r=1')}</label>
+${T?`<label>桌數${I('C.tables',C.tables,'number','min=1 max=150')}</label><label>每桌人數${I('C.seats',C.seats,'number','min=1 max=12')}</label>`:C.mode==='csv'?`<label>名單檔案<span class="fl"><button class="sm" onclick="impR()">匯入csv檔</button><em>${C.roster.length?'已匯入 '+C.roster.length+' 位':'尚未匯入'}</em></span></label>`:`<label>總人數${I('C.total',C.total,'number','min=1 max=1500')}</label>`}</div>
+${C.mode==='csv'?'<div class="wr">⚠ 提醒：此模式抽獎模式僅能使用「一般抽法」，不適用「桌獎抽法」，CSV檔案標題須包含「單位」「大名」，每次抽出一組「單位＋大名」；此模式沒有排除選項。</div>':`<label>排除選項（以逗號分隔）<textarea data-k="C.excl" rows="2" placeholder="${T?'例：3-5（3桌5號）、7（整個7桌）、8~10（8至10桌）':'例：13、20~25（或 20-25）'}">${esc(C.excl)}</textarea></label>`}
+<div class="vb"><button class="sm nv" onclick="tv('R',this)">${VO.R?'關閉檢視':'檢視名單'}</button></div><div class="vp" id="pR" ${VO.R?'':'hidden'}>${VO.R?vR():''}</div></div>
+<div class="card lk"><div class="hh"><h2>獎項設定</h2><button class="sm" onclick="impP()" title="欄位：階段、順序、獎項編號、獎項名稱/提供者、獎品名稱、每次抽出">匯入csv檔</button></div><p class="hn2">可自行輸入獎項內容，亦可匯入 csv檔（標題必須為：階段、順序、獎項編號、獎項名稱/提供者、獎品名稱、每次抽出），匯入後會取代目前獎項，但仍可再調整與增刪！</p>
+${ST.map((s,i)=>`<div class="sub"><div class="sh">${I(`ST.${i}.name`,s.name,'text','maxlength=4')}${ST.length>1?`<span>${i?`<button onclick="act('up',${i})">↑</button> `:''}${i<ST.length-1?`<button onclick="act('dn',${i})">↓</button> `:''}<button onclick="act('del',${i})">刪除</button></span>`:''}</div>
+<div class="g"><label>獎項類別${SE(`ST.${i}.cat`,CATS.map(x=>[x,x]),s.cat,'data-r=1')}</label>
+<label>抽獎次數${I(`ST.${i}.count`,s.count,'number','min=1 max=50 data-r=1')}</label>
+<label>抽獎模式${SE(`ST.${i}.mode`,[['gen','一般抽法'],['table','桌獎抽法（僅抽座位號）']],s.mode,T?'data-r=1':'disabled')}</label>
+<label>複數抽出方式${SE(`ST.${i}.pm`,[['once','一次全部抽'],['seq','依序分次抽']],s.pm,s.prizes.some(q=>q.per>1)?'':'disabled')}</label>
+
+<label>抽獎動畫（過場）<select disabled><option>數字轉動（預設）</option></select></label></div>
+${s.prizes.some(q=>q.per>1)?'<div class="wr">⚠ 提醒：抽選複數時可選擇（預設為一次全部抽）<br>一次全部抽＝僅按一次，全部抽完；依序分次抽＝每按一次，抽出一位。</div>':''}
+<div class="pr ph"><span>順序</span><span>獎項編號</span><span>獎項名稱/提供者</span><span>獎品名稱</span><span>每次抽出</span><span></span></div>
+${s.prizes.map((p,j)=>{const b=`ST.${i}.prizes.${j}.`;return`<div class="pr"><span class="mv"><b>#${j+1}</b><button class="mb" title="上移" ${j?'':'disabled'} onclick="act('pu',${i},${j})">↑</button><button class="mb" title="下移" ${j<s.prizes.length-1?'':'disabled'} onclick="act('pd',${i},${j})">↓</button></span>${I(b+'no',p.no,'text',`maxlength=4 data-r=1 placeholder="${MAN?'請輸入編號':'自動編號'}"`)}${I(b+'name',p.name,'text',`maxlength=20 placeholder="${s.cat}"`)}${I(b+'gift',p.gift,'text','maxlength=10 placeholder="請輸入獎品名稱"')}${I(b+'per',p.per,'number','min=1 max=10 data-r=1 placeholder="1～10"')}<span class="ops"><button class="mb ad" title="在這個獎項後面新增一個獎項" ${s.prizes.length<50?'':'disabled'} onclick="act('padd',${i},${j})">＋</button><button class="mb dl" title="刪除這個獎項" ${s.prizes.length>1?'':'disabled'} onclick="act('pdel',${i},${j})">×</button></span></div>`}).join('')}</div>`).join('')}
+${ST.length<10?'<div style="text-align:right"><button class="lk" onclick="act(\'add\')">＋ 新增階段</button></div>':''}
+<div class="ar gs" style="margin-top:12px"><label class="ck" style="min-width:0">${CK('C.an',C.an&&!MAN,'data-r=1'+(MAN?' disabled':''))} 自動編號順序</label>${SE('C.ord',[['asc','順序'],['desc','倒序']],C.ord,LK||MAN||!C.an?'disabled':'')}<label class="ck" style="min-width:0;margin-left:18px">${CK('C.prov',C.prov)} 獎品來自提供者</label><span style="flex:1;min-width:300px;min-height:34px;display:flex;align-items:center">${MAN?'<span class="wr" style="margin:0">⚠ 提醒：目前已自行獎項編號，無法自動編號。</span>':''}</span></div>
+<div class="vb"><button class="sm nv" onclick="tv('P',this)">${VO.P?'關閉檢視':'檢視獎項'}</button></div><div class="vp" id="pP" ${VO.P?'':'hidden'}>${VO.P?vP():''}</div></div>
+<div class="card gs"><h2>全域設定</h2><div class="ar"><label class="ck">${CK('C.ab',C.ab,'data-r=1')} 允許不在場者</label><label class="sl">※不在場處理${SE('C.abs',[['skip','棄權重抽（該輪不放回重抽）'],['back','放回重抽（該輪可放回重抽）'],['void','獎品充公（該輪不放回亦不重抽）']],C.abs,C.ab?'':'disabled')}</label></div>
+<label class="ck">${CK('C.snd',C.snd)} 允許抽獎音效</label><label class="ck">${CK('C.bonus',C.bonus)} 允許新增加碼</label><label class="ck">${CK('C.free',C.free,'data-r=1')} 允許臨時變動（可自由更改抽獎順序）</label><label class="ck">${CK('C.rep',C.rep,'data-r=1')} 允許重複得獎（得獎者抽出後放回名單）</label>
+${T&&ST.length>=2&&ST[0].mode==='table'&&ST[1].mode==='gen'?`<label class="ck">${CK('C.auto',C.auto&&!C.rep,C.rep?'data-r=1 disabled title="已開啟「允許重複得獎」，此選項無法使用"':'data-r=1')} 已抽出座位號後續不再得獎</label>`:''}</div>
+${w.map(x=>`<div class="wr">⚠ ${x}</div>`).join('')}
+<div class="rw"><button class="sm lg" onclick="im1()">匯入設定</button><button class="sm lg" onclick="ex1()">匯出設定</button><button class="sm lg" onclick="clr()" ${S&&S.res.length?'disabled title="已開始抽獎，無法清除設定"':''}>清除所有設定</button><button class="sm lg" onclick="dsT()">標題設定</button><button class="sm lg" onclick="prev()" title="彩排模式：僅預覽執行畫面，結束後不記錄中獎名單">彩排預覽</button></div>
+<div class="rw">${S?'<button class="b p" onclick="rst()">套用修改並重新開始</button>':''}<button class="b p" onclick="st0()">${S?'不修改繼續抽獎':'開始執行抽獎'}</button></div><div class="lts">瀏覽器最後儲存設定時間：${fts(TS)}</div></div>`;if(LK)document.querySelectorAll('#app .lk input,#app .lk select,#app .lk textarea,#app .lk button:not(.nv),#app button.lk').forEach(e=>e.disabled=true)}
+function act(a,i,j){const y=window.scrollY;
+if(a==='padd'){const P=ST[i]&&ST[i].prizes;if(!P||P.length>=50)return;P.splice(j+1,0,{no:'',name:'',gift:'',per:1});ST[i].count=P.length}
+else if(a==='pdel'){const P=ST[i]&&ST[i].prizes;if(!P||P.length<=1)return;P.splice(j,1);ST[i].count=P.length}
+else if(a==='pu'||a==='pd'){const P=ST[i]&&ST[i].prizes,k=a==='pu'?j-1:j+1;if(!P||k<0||k>=P.length)return;[P[j],P[k]]=[P[k],P[j]]}
+else if(a==='up'||a==='dn'){const k=a==='up'?i-1:i+1;if(k<0||k>=ST.length)return;[ST[i],ST[k]]=[ST[k],ST[i]]}
+else if(a==='del')ST.splice(i,1);else if(ST.length<10)ST.push(mk());save();setView();window.scrollTo(0,y)}
+async function blk(){fix();const man=ST.some(s=>s.prizes.some(p=>p.no.trim()));let a=0,b=0,c=0;ST.forEach(s=>s.prizes.forEach(p=>{if(man&&!p.no.trim())a++;if(!p.name.trim())b++;if(!p.gift.trim())c++}));
+if(!a&&!b&&!c)return false;const L=[a?'獎項編號':'',b?'獎項名稱/提供者':'',c?'獎品名稱':''].filter(Boolean).join('、');
+return new Promise(r=>{M(`<div class="pop s"><h2>提醒</h2><p style="text-align:left;line-height:1.8">尚有空白欄位：${L}。<br>您可以點選「檢視獎項」進行檢查，所有欄位是否都已完成登錄。</p><p style="font-weight:700;color:var(--red)">⚠ 空白的欄位不會被自動填入 ⚠</p><div class="rw"><button id="ay" class="b p">回去修改</button><button id="an" class="b p alt">仍要開始</button></div></div>`);$('#ay').onclick=()=>{M();r(true)};$('#an').onclick=()=>{M();r(false)}})}
+async function st0(){if(C.mode==='csv'&&!C.roster.length)return toast('請先匯入名單 CSV（欄位：單位、大名）');if(S&&S.res.length&&UL){if(!await ask('有尚未套用的設定修改。繼續抽獎會放棄這些修改，沿用目前進度，是否繼續？'))return;try{const o=JSON.parse(SNAP);['mode','tables','seats','total','excl','ord','roster'].forEach(k=>C[k]=o.C[k]);ST=o.ST;save()}catch(e){}}UL=false;if(!S||!S.res.length){fix();if(await blk())return;build()}V='run';render()}
+async function clr(){if(S&&S.res.length)return;if(!await ask('確定要清除所有設定並恢復預設值嗎？'))return;if(!await ask('再次確認：此動作無法復原，是否繼續？'))return;C={...DC};ST=[mk()];S=null;UL=false;try{localStorage.removeItem(LS)}catch(e){}fix();save();V='set';render();toast('已清除設定')}
+async function rst(){if(await blk())return;if(C.mode==='csv'&&!C.roster.length)return toast('請先匯入名單 CSV（欄位：單位、大名）');if(await ask('套用設定並重新開始，目前抽獎結果將被清空，是否繼續？')){UL=false;build();V='run';render()}}
+function render(){if(V==='run'&&!S)V='set';document.body.classList.toggle('rn',V==='run');if(V==='run'){const d=$('#ds');d&&d.classList.remove('open')}V==='run'?runView():setView()}
+/* 抽獎畫面 */
+const cur=()=>S.plan[S.cur];
+const R2=p=>C.mode==='csv'||(C.mode==='table'&&p.gm==='gen'),rost=w=>C.roster[w.v]||{u:'',n:'?'};
+const lab=w=>C.mode==='csv'?(r=>r.u?r.u+'　'+r.n:r.n)(rost(w)):w.t==='s'?`全場 ${w.v} 號`:C.mode==='table'?String(w.v).replace('-','桌')+'號':w.v+' 號';
+const cdh=w=>C.mode==='csv'?(r=>`<span class="u">${esc(r.u)}</span><span>${esc(r.n)}</span>`)(rost(w)):lab(w);
+const fz=a=>`font-size:min(80cqh,${(84/Math.max(3,Math.min(10,a.reduce((m,x)=>Math.max(m,[...x].length),0)))).toFixed(1)}cqw)`;
+function wn(p){const a=[];if(p.gm==='table'&&S.segG)a.push('注意：先「一般抽法」再「桌獎抽法」，可能導致部分桌獎得獎者重複得獎！');if(p.gm==='gen'&&C.mode==='table'&&S.segT&&C.auto&&!C.rep)a.push('注意：先「桌獎抽法」再「一般抽法」，部分桌獎得獎座位號後續不再得獎！');return a}
+let LF=false;
+const pidx=r=>{const i=S.plan.findIndex(q=>q.sn===r.sn&&q.no===r.no&&q.pn===r.pn);return i<0?9999:i};
+const odOf=r=>{if(r.od)return r.od;const i=pidx(r);if(i>=9999)return'';const q=S.plan[i];if(q.od)return q.od;return S.plan.filter(x=>x.sn===q.sn).indexOf(q)+1};
+const srt=a=>a.map((r,i)=>[r,i]).sort((x,y)=>pidx(x[0])-pidx(y[0])||x[1]-y[1]).map(x=>x[0]);
+function lsHtml(){const E='<div class="empty">還沒有中獎者</div>';
+if(LF){const g=[];srt(S.res).forEach(r=>{let s=g.find(y=>y.sn===r.sn);if(!s)g.push(s={sn:r.sn,p:[]});let x=s.p.find(y=>y.no===r.no&&y.pn===r.pn&&y.gift===r.gift);if(!x){s.p.push(x={no:r.no,pn:r.pn,gift:r.gift,od:odOf(r),a:[]})}x.a.push(r)});
+return g.map(s=>`<div class="sg"><div class="sn">${esc(s.sn)}</div><div class="fr fh"><span>順序</span><span>獎項編號</span><span>獎項名稱/提供者</span><span>獎品名稱</span><span>得獎者</span></div>${s.p.map(x=>`<div class="fr"><span>${esc(x.od)}</span><span class="fn">${esc(x.no)}</span><span>${esc(x.pn)}</span><span>${esc(x.gift||'')}</span><span class="chips">${x.a.map(r=>`<span class="ch${r.st==='得獎'?'':' skip'}" title="${esc(r.st)}">${esc(r.w)}</span>`).join('')}</span></div>`).join('')}</div>`).join('')||E}
+const g=[];srt(S.res.filter(r=>r.st==='得獎')).forEach(r=>{let s=g.find(y=>y.sn===r.sn);if(!s)g.push(s={sn:r.sn,p:[]});let x=s.p.find(y=>y.no===r.no&&y.pn===r.pn);if(!x)s.p.push(x={no:r.no,pn:r.pn,a:[]});x.a.push(r)});
+return g.map(s=>`<div class="sg"><div class="sn">${esc(s.sn)}</div>${s.p.map(x=>`<div class="pz sp"><div class="pn">${esc(x.no)}</div><div class="chips">${x.a.map(r=>`<span class="ch">${esc(r.w)}</span>`).join('')}</div></div>`).join('')}</div>`).join('')||E}
+function lsF(v){LF=!!v;$('#wl').innerHTML=lsHtml();document.querySelectorAll('.lt .tg').forEach((b,i)=>b.classList.toggle('on',(i===1)===LF))}
+function runView(){const dn=S.cur<0,p=dn?null:cur(),tb=!dn&&R2(p),cvm=C.mode==='csv',n=dn?0:p.ok?p.N:(p.N||p.per),bm=!dn&&p.pm==='batch'&&n>1,sq=!dn&&p.pm==='seq'&&n>1&&p.ok,once=!dn&&p.pm==='once'&&n>1,rows=Math.ceil(n/5),gs=[];
+S.plan.forEach(x=>{let g=gs.find(y=>y.si===x.si);if(!g)gs.push(g={si:x.si,sn:x.sn,a:[]});g.a.push(x)});
+const sm=MSG||[dn?'':p.ok?`已確定 ${p.N} 位，按「開始抽獎」或空白鍵`:'請先設定「抽幾位」並按「確定」，才能開始抽獎',0],wl=dn?[]:wn(p),
+tabs=gs.map(g=>`<button class="tab" aria-selected="${!dn&&g.si===p.si}" ${C.free&&!dn?'':'disabled'} onclick="tabGo(${g.si})">${esc(g.sn)}${g.a.every(x=>x.done)?' ✓':''}</button>`).join(''),
+opts=S.plan.map((x,i)=>x.done?'':`<option value="${i}"${i===S.cur?' selected':''}>${esc(x.no)}${x.si<0?'':'　'+esc(x.pn)}</option>`).join('');
+const gi=dn?'':(p.gift||'').trim(),gl=gi?`${C.prov?'提供':'　'}<b class="pi b">${esc(gi)}</b>`:'';
+const wns=`<div class="wns">${wl.map(x=>`<div class="wnl">⚠ ${x}</div>`).join('')}</div>`;
+const st=`<p class="status${sm[1]?' warn':''}" id="status">${esc(sm[0])}</p>`;
+const body=dn?'<div class="prize dp">抽獎完成</div><div class="pinfo">全數獎項已抽出，恭喜所有得獎者！</div><div class="dnb"><button class="big" onclick="csv()">匯出中獎名單</button><button class="big" onclick="lsOpen()">查看中獎名單</button></div><div class="dnb"><button class="sm2" onclick="rs(0)">再玩一次</button><button class="sm2" onclick="rs(1)">重新設定</button></div>':
+`<div class="zh"><div class="hd"><div class="prize">${esc(p.no)}</div><div class="pinfo">${p.si<0?'':`<b class="pi a">${esc(p.pn)}</b>${gl}　`}共<b class="pi c">${n}</b>位${sq?`（第 ${Math.min(p.got.length+p.void+1,n)} / ${n} 位）`:''}</div></div>${wns}</div>
+<div class="zm"><div class="reels${tb?'':' solo'}${cvm?' cv':''}" id="reels">${tb?`<div class="reel" id="rT"><div class="lab">${cvm?'單位':'桌次'}</div><div class="num" id="nT"${cvm?` style="${fz(C.roster.map(r=>r.u).concat(C.roster.map(r=>r.n)))}"`:''}>--</div></div>`:''}<div class="reel" id="rS"><div class="lab">${tb?(cvm?'大名':'號次'):p.gm==='table'?'座位號':'編號'}</div><div class="num" id="nS"${cvm?` style="${fz(C.roster.map(r=>r.u).concat(C.roster.map(r=>r.n)))}"`:''}>--</div></div></div>
+<div class="multi${bm?' on':' rv'}" id="multi"${bm?'':' style="min-height:112px"'}>${bm?Array.from({length:n},(_,i)=>`<div class="mc"><small>第 ${i+1} 位</small>--</div>`).join(''):''}</div></div>
+<div class="zb"><div class="brow"><div class="field"><label>現在抽</label><select id="jp" ${C.free?'':'disabled'}>${opts}</select></div>
+<div class="arow"><div class="field"><label>抽幾位</label><input id="nn" type="number" min="1" max="10" value="${n}" ${p.got.length||p.ok?'disabled':''} oninput="cur().ok=false;$('#dr').disabled=true">${p.ok?`<button class="ghost" onclick="cnl()" ${p.got.length?'disabled':''}>取消</button>`:`<button class="ghost" onclick="cfm()">確定</button>`}</div>
+<button id="dr" class="big" onclick="go()" ${p.ok?'':'disabled'}>開始抽獎</button></div></div>${st}</div>`;
+$('#run').innerHTML=`<main><header class="hero"><div class="ht"><div class="eyebrow">${tx('eye')}</div><h1>${tx('title')}</h1></div></header><div class="tabs">${tabs}</div><section class="stage${bm?' bm':''}${dn?'':' zn'}">${body}${dn?st:''}</section></main>
+<div class="tools">${PV?'<button onclick="xpv()">結束預覽</button>':'<button onclick="V=\'set\';render()">設定</button>'}<button onclick="fs()">全螢幕</button>${C.bonus?'<button onclick="bonus()">＋加碼獎</button>':''}</div>
+${PV?'<div class="pvb">⚠彩排模式：僅預覽執行畫面，不記錄中獎名單！</div>':''}<button class="ls-btn" onclick="lsT(this)">${LO?'✕ 關閉名單':'中獎名單'}</button><section class="list${LO?' open':''}" id="ls"><h2><span>中獎名單</span><small>已領獎 ${S.res.filter(r=>r.st==='得獎').length} 位</small></h2><div id="wl">${lsHtml()}</div><div class="lt"><button class="tg${LF?'':' on'}" onclick="lsF(0)">簡易名單</button><button class="tg${LF?' on':''}" onclick="lsF(1)">完整名單</button><button onclick="csv()">匯出中獎名單</button><button onclick="rs(0)">清空結果</button><button onclick="rs(1)">全部清空</button></div></section>`;rsz()}
+function say(m,w){MSG=[m,w];const e=$('#status');if(e){e.textContent=m;e.className='status'+(w?' warn':'')}}
+function cnl(){const p=cur();if(busy||!p||p.got.length)return;p.ok=false;MSG=null;save();runView()}
+function cfm(){const p=cur();p.N=cl($('#nn').value,1,10);p.ok=true;MSG=null;save();runView()}
+function tabGo(si){const i=S.plan.findIndex(x=>x.si===si&&!x.done);if(i>=0){S.cur=i;MSG=null;save();runView()}}
+const lsOpen=()=>{LO=true;$('#ls').classList.add('open');const b=$('.ls-btn');if(b)b.textContent='✕ 關閉名單'};
+const lsT=b=>{LO=!LO;$('#ls').classList.toggle('open',LO);b.textContent=LO?'✕ 關閉名單':'中獎名單'};
+const sndT=b=>{C.snd=!C.snd;save();b.textContent=C.snd?'🔊 音效：開':'🔇 音效：關';SF.land()};
+/* 抽獎流程 */
+function pick(p,k){const g=p.gm==='table',a=g?S.seat:S.pool,o=[];while(k--&&a.length)o.push({t:g?'s':'g',v:a.splice(Math.random()*a.length|0,1)[0]});return o}
+const back=ws=>S.pool.push(...ws.map(w=>w.v));
+function sp(el,box,max,fin,ms){box.classList.add('spin');box.classList.remove('done');return new Promise(r=>{const t0=performance.now();let last=0;(function f(now){const q=(now-t0)/ms;if(q>=1){el.textContent=fin;box.classList.remove('spin');box.classList.add('done');SF.land();return r()}if(now-last>40+q*q*200){last=now;el.textContent=Array.isArray(max)?max[Math.random()*max.length|0]:1+(Math.random()*max|0);SF.tick()}requestAnimationFrame(f)})(t0)})}
+async function spin(ws,p){const cvm=C.mode==='csv',tb=R2(p),mT=cvm?[...new Set(C.roster.map(r=>r.u))]:C.tables,mS=cvm?C.roster.map(r=>r.n):C.mode==='table'?C.seats:C.total,cards=ws.length>1||$('.stage').classList.contains('bm'),fn=w=>cvm?(r=>[r.u,r.n])(rost(w)):tb?String(w.v).split('-'):[w.v];
+if(cards){const m=$('#multi');m.className='multi on';m.innerHTML=ws.map((w,i)=>`<div class="mc"><small>第 ${i+1} 位</small>${cvm?'<span class="u">-</span><span>-</span>':tb?'<span>0</span>桌<span>0</span>號':p.gm==='table'?'全場 <span>0</span> 號':'<span>0</span>號'}</div>`).join('');
+await Promise.all([...m.querySelectorAll('.mc')].flatMap((c,i)=>[...c.querySelectorAll('span')].map((s,j)=>sp(s,c,tb&&j===0?mT:mS,fn(ws[i])[j],tb&&j===1?5000:4000))))}
+else{const f=fn(ws[0]);await Promise.all([...(tb?[sp($('#nT'),$('#rT'),mT,f[0],4000)]:[]),sp($('#nS'),$('#rS'),mS,f[tb?1:0],tb?5000:4000)])}
+await sl(1500)}
+function M(h){$('#modal').innerHTML=h?`<div class="ov">${h}</div>`:''}
+function popup(p,ws){return new Promise(r=>{const tb=p.gm==='table';
+const nw=ws.length,cols=nw<=5?nw:Math.ceil(nw/2),cp=Math.min(nw,2);
+M(`<div class="pop w"><div class="gz">恭喜中獎</div><div class="tag"><b>${esc(p.no)}</b>${p.si<0?'':'　'+esc(p.pn)+((p.gift||'').trim()?(C.prov?'提供':'　')+esc(p.gift.trim()):'')}　共 ${ws.length} 位</div><div class="rows" style="--c:${cols};--cp:${cp}">${ws.map((w,i)=>`<label class="wrow${C.mode==='csv'?' cv':''}">${C.mode==='csv'?(r=>`<div class="un">${esc(r.u)}</div><b>${esc(r.n)}</b>`)(rost(w)):`<b>${lab(w)}</b>`}${tb?'':`${C.ab?`<span><input type="checkbox" checked data-a="${i}" onchange="const w=this.closest('.wrow');w.classList.toggle('no',!!w.querySelector('input:not(:checked)'))">到場</span>`:''}${C.vd?`<span><input type="checkbox" checked data-v="${i}" onchange="const w=this.closest('.wrow');w.classList.toggle('no',!!w.querySelector('input:not(:checked)'))">有效</span>`:''}`}</label>`).join('')}</div>${tb?'<p class="hn">桌獎：全場該座位號皆為得獎</p>':''}<button id="okb" class="big">領獎確認</button></div>`);
+SF.win();burst();$('#okb').focus();
+$('#okb').onclick=()=>{const v=ws.map((_,i)=>{const a=$(`[data-a="${i}"]`),b=$(`[data-v="${i}"]`);return a&&!a.checked?1:b&&!b.checked?2:0});M();r(v)}})}
+function startChk(p){let r=false;if(p.si<0&&p.rs&&!p.rsd){p.rsd=1;r=true}if(r){S.pool=full();S.seat=seats();S.segG=S.segT=false}}
+function fin(p){p.done=true;S.pool.push(...p.abs);p.abs=[];const k=S.plan.indexOf(p),n=S.plan.findIndex((x,i)=>!x.done&&i>k);S.cur=n>=0?n:S.plan.findIndex(x=>!x.done)}
+async function go(){const p=S&&S.cur>=0&&cur();if(busy||!p||!p.ok||p.done)return;busy=1;$('#dr').disabled=true;try{startChk(p);
+const T=p.gm==='table',n=p.pm==='seq'?1:p.N-p.got.length-p.void;let ws=[];say(`抽獎中…　${p.no}　${p.pn}`);
+if(!(T?S.seat:S.pool).length){toast('名單已抽完');fin(p)}
+else if(p.pm==='once'&&n>1){const m=$('#multi');m.className='multi on';m.innerHTML='';for(let i=0;i<n;i++){const w=pick(p,1);if(!w.length)break;await spin(w,p);m.innerHTML+=`<div class="mc"><small>第 ${i+1} 位</small>${cdh(w[0])}</div>`;ws.push(...w)}await settle(p,ws)}
+else{ws=pick(p,n);await spin(ws,p);await settle(p,ws)}
+MSG=p.done?[`${p.no} 抽獎完成，共 ${p.got.length} 位領獎`,0]:null;save()}catch(err){console.error(err);M();const sv=load();if(sv)S=sv;MSG=['發生錯誤，已還原到上一次存檔的狀態，請再試一次',1]}finally{busy=0}
+render()}
+async function settle(p,ws){const T=p.gm==='table',tm=new Date().toLocaleTimeString('zh-TW',{hour12:false});
+while(ws.length){const ok=await popup(p,ws),miss=[];
+ws.forEach((w,i)=>{const R=x=>S.res.push({od:p.od,no:p.no,sn:p.sn,pn:p.pn,gift:p.gift,w:lab(w),st:x,t:tm}),c=ok[i];if(!c){p.got.push(w);R('得獎')}else{const m=c===1?C.abs:C.inv;miss.push({w,m});R((c===1?'不在場':'作廢')+(m==='void'?'（充公）':''))}});
+if(T){S.segT=true;if(C.auto&&!C.rep&&C.mode==='table'){const g=ws.map(w=>''+w.v);S.pool=S.pool.filter(id=>!g.includes(id.split('-')[1]))}}else S.segG=true;
+if(C.rep)ws.forEach((w,i)=>{if(!ok[i])(T?S.seat:S.pool).push(w.v)});
+ws=[];if(!miss.length)break;
+const vd=miss.filter(x=>x.m==='void'),rd=miss.filter(x=>x.m!=='void');
+if(vd.length){back(vd.map(x=>x.w));p.void+=vd.length}
+rd.forEach(x=>{if(x.m==='back')back([x.w]);else p.abs.push(x.w.v)});
+if(!rd.length)break;
+if(S.pool.length){say('有人未到場或作廢，重新抽出補足…');ws=pick(p,rd.length);await spin(ws,p)}}
+if(p.got.length+p.void>=p.N||!(T?S.seat:S.pool).length)fin(p)}
+function bonus(){M(`<div class="pop s" style="text-align:center"><h2>新增加碼獎項</h2><p style="font-size:20px">請選擇抽獎名單來源：</p><div class="rw"><button class="b p alt" style="min-width:230px" onclick="ab(0)">目前未得獎者加碼</button><button class="b p alt" style="min-width:230px" onclick="ab(1)">全數初始名單加碼</button></div><div class="rw"><button class="b p alt" onclick="M()">取消</button></div></div>`)}
+function ab(r){S.bn++;const n='加碼獎'+(S.bn>1?S.bn:'');S.plan.push({si:-1,od:S.bn,sn:'加碼獎',cat:'驚喜獎',gm:'gen',no:n,pn:n,gift:'',per:1,pm:'once',rs:!!r,got:[],void:0,abs:[],N:0,ok:false,done:false});S.cur=S.plan.length-1;MSG=null;save();M();render()}
+function csv(){TX('匯出中獎名單（CSV）','階段,順序,獎項編號,獎項名稱/提供者,獎品名稱,得獎者,狀態,時間\n'+srt(S.res).map(r=>[r.sn,odOf(r),r.no,r.pn,r.gift,r.w,r.st,r.t].map(x=>`"${x}"`).join(',')).join('\n'),'winners.csv')}
+function TX(h,t,fn,ap){window._ap=ap;M(`<div class="pop" style="text-align:left"><h2>${h}</h2><textarea id="tx" rows="10" ${ap?'':'readonly'}>${esc(t)}</textarea><div class="rw"><button onclick="cp()">複製</button>${fn?`<a class="bt" download="${fn}" href="${URL.createObjectURL(new Blob(['\ufeff'+t],{type:'text/plain'}))}">下載檔案</a>`:''}${ap?'<button onclick="_ap()">套用</button>':''}<button onclick="M()">關閉</button></div></div>`)}
+function cp(){const e=$('#tx');e.select();try{navigator.clipboard.writeText(e.value)}catch(x){}try{document.execCommand('copy')}catch(x){}toast('已複製')}
+const dl=(fn,t,mime)=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+t],{type:mime||'text/csv;charset=utf-8'}));a.download=fn;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);toast('已下載：'+fn)};
+const dstr=()=>{const d=new Date(),z=n=>String(n).padStart(2,'0');return d.getFullYear()+z(d.getMonth()+1)+z(d.getDate())};
+const cq=a=>a.map(r=>r.map(x=>'"'+String(x==null?'':x).replace(/"/g,'""')+'"').join(',')).join('\r\n');
+function ex1(){fix();M(`<div class="pop s" style="text-align:center"><h2>匯出設定</h2><p style="font-size:18px">請選擇要匯出的內容：</p><div class="rw"><button class="b p alt" style="min-width:310px" onclick="exO(0)">匯出抽獎設定（JSON）</button></div><div class="rw"><button class="b p alt" style="min-width:310px" onclick="exO(1)">匯出抽獎名單（CSV）</button></div><div class="rw"><button class="b p alt" style="min-width:310px" onclick="exO(2)">匯出獎項名單（CSV）</button></div><div class="rw"><button class="b p alt" onclick="M()">取消</button></div></div>`)}
+function exO(k){fix();M();const d=dstr();
+if(k===0)return dl('尾牙抽獎設定_'+d+'.json',JSON.stringify({C,ST},null,2),'application/json;charset=utf-8');
+if(k===1){let rows;if(C.mode==='csv')rows=[['單位','大名'],...C.roster.map(r=>[r.u,r.n])];
+else{const E=new Set(full());if(C.mode==='table'){rows=[['桌次','號次','狀態']];for(let t=1;t<=C.tables;t++)for(let s=1;s<=C.seats;s++)rows.push([t,s,E.has(t+'-'+s)?'有效':'已排除'])}
+else{rows=[['編號','狀態']];for(let n=1;n<=C.total;n++)rows.push([n,E.has(''+n)?'有效':'已排除'])}}
+return dl('尾牙抽獎名單_'+d+'.csv',cq(rows))}
+const rows=[['階段','順序','獎項編號','獎項名稱/提供者','獎品名稱','每次抽出']];ST.forEach(s=>s.prizes.forEach((p,j)=>rows.push([s.name,j+1,p.no,p.name,p.gift,p.per])));
+dl('尾牙獎項名單_'+d+'.csv',cq(rows))}
+function im1(){pick1(async t=>{let d;try{d=JSON.parse(t.replace(/^\ufeff/,''))}catch(e){return toast('格式錯誤，無法匯入：請選擇「匯出抽獎設定」產生的 JSON 檔')}
+const ok=d&&typeof d==='object'&&d.C&&typeof d.C==='object'&&Array.isArray(d.ST)&&d.ST.length&&d.ST.every(s=>s&&typeof s==='object'&&Array.isArray(s.prizes)&&s.prizes.every(q=>q&&typeof q==='object'));
+if(!ok)return toast('格式錯誤，無法匯入');
+if(S&&S.res.length&&!await ask('匯入設定會清除目前的抽獎進度與結果，是否繼續？'))return;
+const oc=C,os=ST;try{C={...DC,...d.C};ST=d.ST;mig();fix()}catch(e){C=oc;ST=os;return toast('格式錯誤，無法匯入')}
+S=null;UL=false;save();M();V='set';render();toast('已匯入設定')},'.json,application/json,.txt')}
+function RM(b,two){return new Promise(r=>{M(`<div class="pop s"><h2>提醒</h2><p style="text-align:left;line-height:1.8">${b}</p><p style="font-weight:700;color:var(--red)">⚠ 請確認以上提醒，否則無法順利進行抽獎！⚠</p><div class="rw"><button id="ay" class="b p">${two?'確定':'我知道了'}</button>${two?'<button id="an" class="b p alt">取消</button>':''}</div></div>`);$('#ay').onclick=()=>{M();r(true)};if(two)$('#an').onclick=()=>{M();r(false)}})}
+function ask(m,y='確定',n='取消',eq){return new Promise(r=>{M(`<div class="pop s"><p style="font-size:20px">${m}</p><div class="rw"><button id="ay" class="b p">${y}</button><button id="an" class="b p alt">${n}</button></div></div>`);$('#ay').onclick=()=>{M();r(true)};$('#an').onclick=()=>{M();r(false)}})}
+async function prev(){if(C.mode==='csv'&&!C.roster.length)return toast('請先匯入名單 CSV（欄位：單位、大名）');fix();PV={S,UL};UL=false;build();V='run';LO=false;render()}
+function xpv(){if(busy)return toast('抽獎進行中，請稍候');S=PV.S;UL=PV.UL;PV=null;LO=false;V='set';render()}
+async function rs(all){if(PV){if(all)xpv();else{build();M();render()}return}if(!await ask(all?'確定要「清空設定與抽獎結果」嗎？':'確定要清空抽獎結果（保留設定）嗎？'))return;if(!await ask('再次確認：此動作無法復原，是否繼續？'))return;
+if(all){C={...DC};ST=[mk()];S=null;V='set';try{localStorage.removeItem(LS)}catch(e){}}else build();M();render()}
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',2200)}
+function fs(){const d=document,e=d.documentElement,on=d.fullscreenElement||d.webkitFullscreenElement,f=on?(d.exitFullscreen||d.webkitExitFullscreen):(e.requestFullscreen||e.webkitRequestFullscreen);
+const no=()=>toast('此環境不允許全螢幕，請改用瀏覽器直接開啟檔案，或按 F11');
+if(!f)return no();try{const r=f.call(on?d:e);r&&r.catch&&r.catch(no)}catch(x){no()}}
+document.addEventListener('input',e=>{const t=e.target,k=t.dataset.k;if(!k)return;const v=t.type==='checkbox'?t.checked:t.type==='number'?+t.value:t.value,a=k.split('.');let o=a[0]==='C'?C:ST;a.slice(1,-1).forEach(x=>o=o[x]);o[a.pop()]=v;save();if(V==='set')rv()});
+document.addEventListener('change',e=>{if(e.target.dataset.r)setView();if(e.target.dataset.k==='C.mode'&&C.mode==='csv')RM('選擇「匯入csv檔」名單模式後：<br>① 抽獎模式僅能使用「一般抽法」，桌獎抽法無法使用。<br>② CSV 第一列標題須包含「單位」「大名」。<br>③ 單位至多6個中文字、大名至多4個中文字，生僻字可能無法顯示。<br>④ 此模式沒有排除選項，請自行在原始名單做更改。');if(e.target.id==='jp'){S.cur=+e.target.value;MSG=null;save();runView()}});
+document.addEventListener('keydown',e=>{if(e.code==='Space'&&V==='run'&&S&&!$('#modal').firstChild&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)){e.preventDefault();if(e.repeat)return;document.activeElement.blur();const d=$('#dr');if(d&&!d.disabled)go()}});
+addEventListener('beforeunload',e=>{if(S&&S.res.length&&S.cur>=0){e.preventDefault();e.returnValue=''}});
+(async()=>{S=load();if(S&&!S.res.length)S=null;dApply();dBuild();if(S){let keep=S.cur<0||await ask('發現未完成的進度，要繼續嗎？<br><small>選「取消」將保留設定、清空抽獎結果</small>');if(!keep)keep=!(await ask('再次確認：放棄未完成的進度並清空抽獎結果？<br><small>此動作無法復原</small>'));if(keep)V='run';else{S=null;save()}}render()})();
+</script></body></html>
